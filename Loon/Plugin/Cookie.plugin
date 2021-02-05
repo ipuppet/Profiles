@@ -1,10 +1,9 @@
-# 获取Cookie订阅 By nzw9314
+# 获取Cookie
 # 该订阅仅适用于定时签到脚本的Cookie获取. 
 # 集成: NobyDa、Chavy以及个人收集常用签到脚本. 
 # 您可以在使用后手动将其禁用，以免产生不必要的MITM.
 
-hostname = api.m.jd.com, daojia.jd.com, ms.jr.jd.com, draw.jdfcloud.com, *.bilibili.com, *.v2ex.com, m.weibo.cn, weibo.com, api.weibo.cn, pay.sc.weibo.com, ios.baertt.com, *.youth.cn, api.cashtoutiao.com, appv8.qukantianxia.com ,appv7.qukantx.com, www.flyertea.com, act.10010.com, m.client.10010.com, webapi.qmai.cn, mall.oclean.com
-
+[Script]
 # > 京东
 # 浏览器登录 https://bean.m.jd.com 点击签到并且出现签到日历
 http-request https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean(Index|GroupStageIndex) max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
@@ -39,15 +38,5 @@ http-request ^https:\/\/act.10010.com\/SigninApp\/signin\/querySigninActivity.ht
 http-request ^https:\/\/act.10010.com\/SigninApp(.*?)\/signin\/daySign script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js
 http-request ^https:\/\/m.client.10010.com\/dailylottery\/static\/(textdl\/userLogin|active\/findActivityInfo) script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js
 
-# > 奈雪 (By @zZPiglet)
-http-request ^https:\/\/webapi\.qmai\.cn\/web\/cy\/v\d\/store\/template-scene script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/Naixue/Naixue.js, tag=奈雪cookie
-
-# > 欧可林 (By @zZPiglet)
-http-request ^https:\/\/mall\.oclean\.com\/API\/VshopProcess\.ashx$ script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/Oclean/Oclean.js, tag=欧可林cookie
-
-# > 微信小程序 - 欧可林商城 (By @zZPiglet)
-http-request ^https:\/\/mall\.oclean\.com\/API\/VshopProcess\.ashx\?action=TaskHome&clientType=5&client=5&openId= script-path=https://raw.githubusercontent.com/zZPiglet/Task/master/Oclean/Oclean_mini.js, tag=欧可林商城cookie
-
-# > 微信小程序 活动抽奖 (By @makexp & @zZPiglet)
-# 打开微信小程序 进入”活动抽奖”，手动签到一次或点击”已签到”
-#http-request ^https:\/\/api-hdcj\.9w9\.com\/v\d\/sign script-path=https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Task/WeChatLottery_new.js
+[MITM]
+hostname = api.m.jd.com, daojia.jd.com, ms.jr.jd.com, draw.jdfcloud.com, *.bilibili.com, *.v2ex.com, m.weibo.cn, weibo.com, api.weibo.cn, pay.sc.weibo.com, ios.baertt.com, *.youth.cn, api.cashtoutiao.com, appv8.qukantianxia.com ,appv7.qukantx.com, www.flyertea.com, act.10010.com, m.client.10010.com
