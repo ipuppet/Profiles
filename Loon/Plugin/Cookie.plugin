@@ -6,24 +6,23 @@
 [Script]
 # > 京东
 # 浏览器登录 https://bean.m.jd.com 点击签到并且出现签到日历
-http-request https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean(Index|GroupStageIndex) max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
-# > 京东618
-http-request ^https:\/\/api.m.jd.com\/client.action\?functionId=cakebaker_getHomeData script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/jd/jd.618.cookie.js,requires-body=true
+# 获取多账号京东Cookie
+http-request https:\/\/me-api\.jd\.com\/user_new\/info\/GetJDUserInfoUnion script-path=https://jdsharedresourcescdn.azureedge.net/jdresource/JD_extra_cookie.js, tag=获取多账号京东Cookie
 
 # > 哔哩哔哩漫画
-http-request https:\/\/manga\.bilibili\.com\/.*\.User\/GetWallet max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js
+http-request https:\/\/manga\.bilibili\.com\/.*\.User\/GetWallet max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js, tag=哔哩哔哩漫画
 
-# > 哔哩哔哩
+# > 哔哩哔哩直播
 # 浏览器访问并登录: https://www.bilibili.com 或 https://live.bilibili.com 系统提示:获取Cookie: 成功
-http-request ^https:\/\/(www|live)\.bilibili\.com\/?.? script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/bilibili.cookie.js
+http-request ^https:\/\/(www|live)\.bilibili\.com\/?.? script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/bilibili/bilibili.cookie.js, tag=哔哩哔哩直播
 
 # > V2ex
-http-request ^https:\/\/www\.v2ex\.com\/mission\/daily script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/v2ex/v2ex.cookie.js
+http-request ^https:\/\/www\.v2ex\.com\/mission\/daily script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/v2ex/v2ex.cookie.js, tag=V2ex
 
 # > 微博(By @Macsuny)
-http-request https:\/\/api\.weibo\.cn\/\d\/video\/machine\?gsid script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/weibo.js
-# > 钱包
-http-request https:\/\/pay\.sc\.weibo\.com\/aj\/mobile\/home\/welfare\/signin\/do\? script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/weibo.js
+http-request https:\/\/api\.weibo\.cn\/\d\/video\/machine\?gsid script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/weibo.js, tag=微博
+# > 微博钱包
+http-request https:\/\/pay\.sc\.weibo\.com\/aj\/mobile\/home\/welfare\/signin\/do\? script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/weibo.js, tag=微博钱包
 
 # > 中青看点极速版 (By @Macsuny)
 http-request https:\/\/ios\.baertt\.com\/v5\/article\/complete script-path=https://raw.githubusercontent.com/Sunert/Scripts/master/Task/youth.js, requires-body=true
@@ -39,4 +38,4 @@ http-request ^https:\/\/act.10010.com\/SigninApp(.*?)\/signin\/daySign script-pa
 http-request ^https:\/\/m.client.10010.com\/dailylottery\/static\/(textdl\/userLogin|active\/findActivityInfo) script-path=https://raw.githubusercontent.com/chavyleung/scripts/master/10010/10010.cookie.js
 
 [MITM]
-hostname = api.m.jd.com, daojia.jd.com, ms.jr.jd.com, draw.jdfcloud.com, *.bilibili.com, *.v2ex.com, m.weibo.cn, weibo.com, api.weibo.cn, pay.sc.weibo.com, ios.baertt.com, *.youth.cn, api.cashtoutiao.com, appv8.qukantianxia.com ,appv7.qukantx.com, www.flyertea.com, act.10010.com, m.client.10010.com
+hostname = me-api.jd.com, *.bilibili.com, *.v2ex.com, m.weibo.cn, weibo.com, api.weibo.cn, pay.sc.weibo.com, ios.baertt.com, *.youth.cn, api.cashtoutiao.com, appv8.qukantianxia.com ,appv7.qukantx.com, www.flyertea.com, act.10010.com, m.client.10010.com
