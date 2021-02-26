@@ -60,6 +60,5 @@ function changeModel(config, isNotification) {
     }
     if (isNotification) {
         $notification.post("网络变化", `网络已切换到：${config.ssid}`, message)
-
     }
 }
