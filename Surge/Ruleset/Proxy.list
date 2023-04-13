@@ -13,3 +13,4 @@ DOMAIN-SUFFIX,nloli.xyz
 DOMAIN-KEYWORD,parsec
 IP-CIDR,104.18.1.181/24,no-resolve
 DOMAIN-SUFFIX,civitai.com
+DOMAIN-SUFFIX,huggingface.co
