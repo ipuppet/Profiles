@@ -1,0 +1,8 @@
+#!name= TestFlight
+#!desc= 解除 TestFlight 地区限制
+
+[Script]
+http-request ^https?:\/\/testflight\.apple\.com\/v\d\/accounts\/.+?\/install$ requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/ipuppet/Profiles/master/Scripts/TestFlight.js, tag=解除 TestFlight 地区限制
+
+[MITM]
+hostname = testflight.apple.com
