@@ -1,0 +1,5 @@
+#!name= Change DNS to router
+#!desc= Change DNS to router
+
+[General]
+dns-server = 192.168.50.2
