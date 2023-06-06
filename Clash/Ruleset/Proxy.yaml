@@ -8,6 +8,8 @@ payload:
   - DOMAIN-SUFFIX,npmjs.org
   - DOMAIN-SUFFIX,f-droid.org
 
+  - DOMAIN,engage.cloudflareclient.com
+
   - DOMAIN-SUFFIX,freenom.com
   - DOMAIN-SUFFIX,vercel.app
   - DOMAIN,www.speedtest.net
