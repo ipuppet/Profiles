@@ -1,3 +1,5 @@
+// https?://raw\.githubusercontent\.com((?!ipuppet).)*.*\.js$
+
 let body = $response.body
 
 body = body.replaceAll("$.log", "__mute")
