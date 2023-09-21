@@ -11,6 +11,7 @@ payload:
   - DOMAIN,engage.cloudflareclient.com
 
   - DOMAIN-SUFFIX,freenom.com
+  - DOMAIN-SUFFIX,githubusercontent.com
   - DOMAIN-SUFFIX,vercel.app
   - DOMAIN,www.speedtest.net
   - DOMAIN-SUFFIX,myanimelist.net
