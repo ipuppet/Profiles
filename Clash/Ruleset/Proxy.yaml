@@ -23,3 +23,4 @@ payload:
   - DOMAIN-SUFFIX,civitai.com
   - DOMAIN-SUFFIX,huggingface.co
   - DOMAIN-SUFFIX,brew.sh
+  - DOMAIN-SUFFIX,drawboard.com
