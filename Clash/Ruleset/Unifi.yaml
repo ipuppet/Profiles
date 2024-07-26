@@ -2,4 +2,4 @@ payload:
   - DOMAIN-SUFFIX,frdic.com
   - DOMAIN-SUFFIX,eudic.net
   - DOMAIN-SUFFIX,baidu.com
-  - DOMAIN,mytan.maiseed.com.cn
+  - DOMAIN-SUFFIX,mytan.maiseed.com.cn
