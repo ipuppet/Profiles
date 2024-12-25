@@ -26,3 +26,4 @@ payload:
   - DOMAIN-SUFFIX,drawboard.com
   - DOMAIN-SUFFIX,stardream.cloud
   - DOMAIN-KEYWORD,debian
+  - DOMAIN-SUFFIX,metacubex.one
