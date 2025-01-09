@@ -25,5 +25,6 @@ payload:
   - DOMAIN-SUFFIX,brew.sh
   - DOMAIN-SUFFIX,drawboard.com
   - DOMAIN-SUFFIX,stardream.cloud
+  - DOMAIN-SUFFIX,metacubex.one
   - DOMAIN-KEYWORD,debian
   - DOMAIN-KEYWORD,nexon
