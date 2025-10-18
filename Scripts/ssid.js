@@ -379,15 +379,14 @@ if (typeof $argument == "string" && $argument) {
     }
 }
 
-const storage = new Storage()
-storage.setKeyPrefix("ipuppet.boxjs.ssid.")
-
 const Config = {}
 if (Args.override) {
     Config.notification = Args.notification
     Config.default = Args.default
     Config.ssidConfig = Args.ssidConfig
 } else {
+    const storage = new Storage()
+    storage.setKeyPrefix("ipuppet.boxjs.ssid.")
     Config.notification = storage.get("notificationMode", Config.notification)
     Config.default = storage.get("defaultMode", Config.default)
     Config.ssidConfig = storage.get("modeList", Config.ssidConfig)
