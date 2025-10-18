@@ -1,7 +1,7 @@
 #!name=SSID Switcher
 #!desc=根据 SSID 自动更改策略组和 Outbound Mode
 #!arguments=override:"false",notification:"None",default:"",ssidConfig:""
-#!arguments-desc=override:[false|true]
+#!arguments-desc=override: [false|true]\ndefault: outboundMode:policyGroup=policy,policyGroup2=policy2\nssidConfig: ssid1:outboundMode:policyGroup=policy,policyGroup2=policy2;ssid2:outboundMode:policyGroup=policy,policyGroup2=policy2
 
 [Script]
-ssid = type=event,event-name=network-changed,script-path=https://raw.githubusercontent.com/ipuppet/Profiles/master/Scripts/ssid.js,argument=override={{{override}}}notification={{{notification}}}&default={{{default}}}&ssidConfig={{{ssidConfig}}}
+ssid = type=event,event-name=network-changed,script-path=https://raw.githubusercontent.com/ipuppet/Profiles/master/Scripts/ssid.js,argument=override="{{{override}}}"&notification="{{{notification}}}"&default="{{{default}}}"&ssidConfig="{{{ssidConfig}}}"

@@ -358,19 +358,47 @@ class SSID {
     }
 }
 
+// "outboundMode:policyGroup=policy,policyGroup2=policy2"
+function parseStringConfig(configStr) {
+    const config = {}
+    let items = configStr.trim().split(":")
+    config.outboundMode = items[0]
+    config.selectPolicy = {}
+    for (let item of items[1].trim().split(",")) {
+        let [group, policy] = item.trim().split("=")
+        config.selectPolicy[group] = policy
+    }
+    return config
+}
+
+// "ssid1:outboundMode:policyGroup=policy,policyGroup2=policy2;ssid2:outboundMode:policyGroup=policy,policyGroup2=policy2"
+function parseSSIDConfig(configStr) {
+    const config = {}
+    const items = configStr.trim().split(";")
+    for (let item of items) {
+        const ssid = item.split(":")[0].trim()
+        const cfgStr = item.slice(ssid.length + 1).trim()
+        config[ssid] = parseStringConfig(cfgStr)
+    }
+    return config
+}
+
 const Args = {}
 if (typeof $argument == "string" && $argument) {
     const args = $argument.split("&")
     for (let arg of args) {
-        const [key, value] = arg.split("=")
+        const key = arg.split("=")[0]
+        const value = arg.slice(key.length + 1).slice(1, -1)
         if (key === "override" && value === "true") {
             Args.override = true
             continue
         }
         switch (key) {
             case "config":
+                Args[key] = parseStringConfig(value)
+                break
             case "ssidConfig":
-                Args[key] = JSON.parse(value === "" ? "{}" : value)
+                Args[key] = parseSSIDConfig(value)
                 break
             case "notification":
                 Args[key] = value
@@ -388,8 +416,8 @@ if (Args.override) {
     const storage = new Storage()
     storage.setKeyPrefix("ipuppet.boxjs.ssid.")
     Config.notification = storage.get("notificationMode", Config.notification)
-    Config.default = storage.get("defaultMode", Config.default)
-    Config.ssidConfig = storage.get("modeList", Config.ssidConfig)
+    Config.default = storage.get("defaultMode", Config.default, true)
+    Config.ssidConfig = storage.get("modeList", Config.ssidConfig, true)
 }
 
 const ssid = new SSID()
