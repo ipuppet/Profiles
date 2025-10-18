@@ -358,31 +358,39 @@ class SSID {
     }
 }
 
-const storage = new Storage()
-storage.setKeyPrefix("ipuppet.boxjs.ssid.")
-
-const Config = {
-    notification: storage.get("notificationMode", "All"),
-    default: storage.get("defaultMode", {}, true),
-    ssidConfig: storage.get("modeList", {}, true)
-}
+const Args = {}
 if (typeof $argument == "string" && $argument) {
     const args = $argument.split("&")
     for (let arg of args) {
         const [key, value] = arg.split("=")
-        if (key === "override" && value !== "true") {
-            break
+        if (key === "override" && value === "true") {
+            Args.override = true
+            continue
         }
         switch (key) {
             case "config":
             case "ssidConfig":
-                Config[key] = JSON.parse(decodeURIComponent(value))
+                Args[key] = JSON.parse(value === "" ? "{}" : value)
                 break
             case "notification":
-                Config[key] = NotificationMode[value]
+                Args[key] = NotificationMode[value]
                 break
         }
     }
+}
+
+const storage = new Storage()
+storage.setKeyPrefix("ipuppet.boxjs.ssid.")
+
+const Config = {}
+if (Args.override) {
+    Config.notification = Args.notification
+    Config.default = Args.default
+    Config.ssidConfig = Args.ssidConfig
+} else {
+    Config.notification = storage.get("notificationMode", Config.notification)
+    Config.default = storage.get("defaultMode", Config.default)
+    Config.ssidConfig = storage.get("modeList", Config.ssidConfig)
 }
 
 const ssid = new SSID()
