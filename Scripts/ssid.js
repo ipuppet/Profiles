@@ -1,6 +1,6 @@
 /**
  * 根据 SSID 自动更改策略组和 Outbound Mode
- * 
+ *
  * Author: ipuppet
  * GitHub: https://github.com/ipuppet/Profiles/blob/master/Scripts/ssid.js
  */
@@ -8,16 +8,12 @@
 class Storage {
     constructor() {
         this.keyPrefix = ""
-        this.empty = [
-            undefined,
-            null,
-            ""
-        ]
+        this.empty = [undefined, null, ""]
     }
 
     /**
      * 增加一个空集元素
-     * @param {*} empty 
+     * @param {*} empty
      * @returns this
      */
     addEmpty(empty) {
@@ -27,7 +23,7 @@ class Storage {
 
     /**
      * 设置空集
-     * @param {Array} empty 
+     * @param {Array} empty
      * @returns this
      */
     setEmpty(empty) {
@@ -37,7 +33,7 @@ class Storage {
 
     /**
      * item 为空则返回 true
-     * @param {*} item 
+     * @param {*} item
      * @returns {Boolean}
      */
     isEmpty(item) {
@@ -52,7 +48,7 @@ class Storage {
 
     /**
      * 设置 key 前缀
-     * @param {String} keyPrefix 
+     * @param {String} keyPrefix
      * @returns this
      */
     setKeyPrefix(keyPrefix) {
@@ -75,8 +71,8 @@ class Storage {
 
     /**
      * 写入数据
-     * @param {*} value 
-     * @param {String} key 
+     * @param {*} value
+     * @param {String} key
      */
     set(key, value) {
         if (typeof value === "object") {
@@ -179,8 +175,8 @@ class OutboundMode {
 
     /**
      * 将 OutboundMode 转换为文本用于展示
-     * @param {OutboundMode} mode 
-     * @returns 
+     * @param {OutboundMode} mode
+     * @returns
      */
     toString() {
         return this.name
@@ -221,9 +217,9 @@ class Utils {
 
     /**
      * 发送通知
-     * @param {String} title 
-     * @param {String} subtitle 
-     * @param {String} body 
+     * @param {String} title
+     * @param {String} subtitle
+     * @param {String} body
      */
     static notification(title, subtitle, body) {
         $notification.post(title, subtitle, body)
@@ -274,19 +270,19 @@ class SSID {
      * @param {Number} notification NotificationMode
      * @returns this
      */
-    setNotificationMode(notificationMode) {
-        this.notificationMode = notificationMode
+    setNotification(notification) {
+        this.notification = notification
 
         return this
     }
 
     _isNotification() {
-        if (this.notificationMode === NotificationMode.All) return true
-        if (this.notificationMode === NotificationMode.None) return false
+        if (this.notification === NotificationMode.All) return true
+        if (this.notification === NotificationMode.None) return false
         const mode = this._getMode()
-        if (mode === this.defaultMode) {
-            if (this.notificationMode === NotificationMode.NotMatched) return true
-        } else if (this.notificationMode === NotificationMode.Matched) {
+        if (mode === this.default) {
+            if (this.notification === NotificationMode.NotMatched) return true
+        } else if (this.notification === NotificationMode.Matched) {
             return true
         }
 
@@ -295,7 +291,7 @@ class SSID {
 
     /**
      * 配置某网络下的运行模式
-     * @param {Object} modeList 格式如下：
+     * @param {Object} ssidConfig 格式如下：
      * "ssid名称": {
      *     outboundMode: OutboundMode, // 运行模式
      *     selectPolicy: { // 设置策略
@@ -306,38 +302,38 @@ class SSID {
      * }
      * @returns this
      */
-    setModeList(modeList) {
-        Object.keys(modeList).forEach(ssid => {
-            if (typeof modeList[ssid].outboundMode === "string") {
-                modeList[ssid].outboundMode = OutboundMode[modeList[ssid].outboundMode]
+    setSSIDConfig(ssidConfig) {
+        Object.keys(ssidConfig).forEach(ssid => {
+            if (typeof ssidConfig[ssid].outboundMode === "string") {
+                ssidConfig[ssid].outboundMode = OutboundMode[ssidConfig[ssid].outboundMode]
             }
         })
-        this.modeList = modeList
+        this.modeList = ssidConfig
 
         return this
     }
 
     /**
      * 所有未配置的网络更改均走此配置
-     * @param {Object} defaultMode 
+     * @param {Object} defaultMode
      * @returns this
      */
-    setDelaultMode(defaultMode) {
+    setDelault(defaultMode) {
         if (typeof defaultMode?.outboundMode === "string") {
             defaultMode.outboundMode = OutboundMode[defaultMode.outboundMode]
         }
-        this.defaultMode = defaultMode
+        this.default = defaultMode
 
         return this
     }
 
     _getMode() {
-        return this.modeList[this.ssid] ?? this.defaultMode
+        return this.modeList[this.ssid] ?? this.default
     }
 
     /**
      * 切换运行模式
-     * @param {Function} callback 
+     * @param {Function} callback
      */
     changeMode(callback) {
         const config = this._getMode()
@@ -365,15 +361,32 @@ class SSID {
 const storage = new Storage()
 storage.setKeyPrefix("ipuppet.boxjs.ssid.")
 
-const userStorage = {
-    notificationMode: storage.get("notificationMode", "All"),
-    defaultMode: storage.get("defaultMode", {}, true),
-    modeList: storage.get("modeList", {}, true)
+const Config = {
+    notification: storage.get("notificationMode", "All"),
+    default: storage.get("defaultMode", {}, true),
+    ssidConfig: storage.get("modeList", {}, true)
+}
+if (typeof $argument == "string" && $argument) {
+    const args = $argument.split("&")
+    for (let arg of args) {
+        const [key, value] = arg.split("=")
+        if (key === "override" && value !== "true") {
+            break
+        }
+        switch (key) {
+            case "config":
+            case "ssidConfig":
+                Config[key] = JSON.parse(decodeURIComponent(value))
+                break
+            case "notification":
+                Config[key] = NotificationMode[value]
+                break
+        }
+    }
 }
 
 const ssid = new SSID()
-ssid
-    .setNotificationMode(NotificationMode[userStorage.notificationMode])
-    .setDelaultMode(userStorage.defaultMode)
-    .setModeList(userStorage.modeList)
-    .changeMode(() => { $done() })
+ssid.setNotification(NotificationMode[Config.notification])
+    .setDelault(Config.default)
+    .setSSIDConfig(Config.ssidConfig)
+    .changeMode(() => $done())
