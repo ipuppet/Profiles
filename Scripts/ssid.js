@@ -373,7 +373,7 @@ if (typeof $argument == "string" && $argument) {
                 Args[key] = JSON.parse(value === "" ? "{}" : value)
                 break
             case "notification":
-                Args[key] = NotificationMode[value]
+                Args[key] = value
                 break
         }
     }
