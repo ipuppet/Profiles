@@ -4,4 +4,4 @@
 #!arguments-desc=override:[false|true]
 
 [Script]
-ssid = type=generic,timeout=10,script-path=https://raw.githubusercontent.com/ipuppet/Profiles/master/Scripts/ssid.js,argument=override={{{override}}}notification={{{notification}}}&default={{{default}}}&ssidConfig={{{ssidConfig}}}
+ssid = type=event,event-name=network-changed,script-path=https://raw.githubusercontent.com/ipuppet/Profiles/master/Scripts/ssid.js,argument=override={{{override}}}notification={{{notification}}}&default={{{default}}}&ssidConfig={{{ssidConfig}}}
