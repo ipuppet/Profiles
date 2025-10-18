@@ -394,7 +394,7 @@ if (typeof $argument == "string" && $argument) {
             continue
         }
         switch (key) {
-            case "config":
+            case "default":
                 Args[key] = parseStringConfig(value)
                 break
             case "ssidConfig":
