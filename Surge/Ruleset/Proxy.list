@@ -1,8 +1,3 @@
-# Google Voice
-DOMAIN,lens.l.google.com
-DOMAIN-SUFFIX,voice.telephony.goog
-IP-CIDR,216.239.36.145/32,no-resolve
-
 DOMAIN-SUFFIX,githubusercontent.com
 DOMAIN-SUFFIX,freenom.com
 DOMAIN-SUFFIX,vercel.app
@@ -18,3 +13,5 @@ DOMAIN-SUFFIX,huggingface.co
 DOMAIN-SUFFIX,stardream.cloud
 DOMAIN-SUFFIX,metacubex.one
 DOMAIN-KEYWORD,nexon
+DOMAIN-KEYWORD,paoluz
+DOMAIN-SUFFIX,ish.app

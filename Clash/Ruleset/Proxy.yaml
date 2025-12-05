@@ -1,9 +1,4 @@
 payload:
-  # Google Voice
-  - DOMAIN,lens.l.google.com
-  - DOMAIN-SUFFIX,voice.telephony.goog
-  - IP-CIDR,216.239.36.145/32,no-resolve
-
   - DOMAIN-SUFFIX,docker.io
   - DOMAIN-SUFFIX,npmjs.org
   - DOMAIN-SUFFIX,f-droid.org
@@ -28,5 +23,6 @@ payload:
   - DOMAIN-SUFFIX,metacubex.one
   - DOMAIN-KEYWORD,debian
   - DOMAIN-KEYWORD,nexon
+  - DOMAIN-KEYWORD,paoluz
   - DOMAIN-KEYWORD,grazie.aws.intellij.net
   - DOMAIN-KEYWORD,grazie.ai

@@ -1,0 +1,4 @@
+# Google Voice
+DOMAIN,lens.l.google.com
+DOMAIN-SUFFIX,voice.telephony.goog
+IP-CIDR,216.239.36.145/32,no-resolve
