@@ -253,6 +253,24 @@ class Utils {
             return JSON.parse(this.loonConfig.getConfig()).ssid
         }
     }
+
+    static getArgument(key) {
+        if (this.isSurge) {
+            if (typeof $argument === "string" && $argument) {
+                const args = $argument.split("&")
+                for (let arg of args) {
+                    const k = arg.split("=")[0]
+                    if (k === key) {
+                        return arg.slice(k.length + 1).slice(1, -1)
+                    }
+                }
+            }
+        } else if (this.isLoon) {
+            if (typeof $argument === "object" && $argument) {
+                return $argument[key]
+            }
+        }
+    }
 }
 
 const NotificationMode = {
@@ -383,35 +401,16 @@ function parseSSIDConfig(configStr) {
     return config
 }
 
-const Args = {}
-if (typeof $argument == "string" && $argument) {
-    const args = $argument.split("&")
-    for (let arg of args) {
-        const key = arg.split("=")[0]
-        const value = arg.slice(key.length + 1).slice(1, -1)
-        if (key === "override" && value === "true") {
-            Args.override = true
-            continue
-        }
-        switch (key) {
-            case "default":
-                Args[key] = parseStringConfig(value)
-                break
-            case "ssidConfig":
-                Args[key] = parseSSIDConfig(value)
-                break
-            case "notification":
-                Args[key] = value
-                break
-        }
-    }
-}
-
 const Config = {}
-if (Args.override) {
-    Config.notification = Args.notification
-    Config.default = Args.default
-    Config.ssidConfig = Args.ssidConfig
+if (Utils.getArgument("override") === "true") {
+    const defaultVal = Utils.getArgument("default")
+    if (defaultVal) Config.default = parseStringConfig(defaultVal)
+
+    const ssidConfigVal = Utils.getArgument("ssidConfig")
+    if (ssidConfigVal) Config.ssidConfig = parseSSIDConfig(ssidConfigVal)
+
+    const notificationVal = Utils.getArgument("notification")
+    if (notificationVal) Config.notification = notificationVal
 } else {
     const storage = new Storage()
     storage.setKeyPrefix("ipuppet.boxjs.ssid.")

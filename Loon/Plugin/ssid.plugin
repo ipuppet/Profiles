@@ -1,0 +1,12 @@
+#!name=SSID Switcher
+#!desc=根据 SSID 自动更改策略组和 Outbound Mode
+#!homepage=https://github.com/ipuppet/Profiles
+
+[Argument]
+override = switch,true,tag=Override,desc=Override BoxJs Config
+notification = select,"None","All","Matched","NotMatched",tag=Notification Type
+default = input,"outboundMode:policyGroup=policy,policyGroup2=policy2",tag=Default Policy
+ssidConfig = input,"ssid1:outboundMode:policyGroup=policy,policyGroup2=policy2;ssid2:outboundMode:policyGroup=policy,policyGroup2=policy2",tag=SSID Policy
+
+[Script]
+network-changed script-path=https://raw.githubusercontent.com/ipuppet/Profiles/master/Scripts/ssid.js, timeout=300, tag=ssid,argument=[override,notification,default,ssidConfig]
