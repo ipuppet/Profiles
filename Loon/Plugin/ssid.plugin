@@ -9,4 +9,4 @@ default = input,"outboundMode:policyGroup=policy,policyGroup2=policy2",tag=Defau
 ssidConfig = input,"ssid1:outboundMode:policyGroup=policy,policyGroup2=policy2;ssid2:outboundMode:policyGroup=policy,policyGroup2=policy2",tag=SSID Policy
 
 [Script]
-network-changed script-path=https://raw.githubusercontent.com/ipuppet/Profiles/master/Scripts/ssid.js, timeout=300, tag=ssid,argument=[override,notification,default,ssidConfig]
+network-changed script-path=https://raw.githubusercontent.com/ipuppet/Profiles/master/Scripts/ssid.js, timeout=300, tag=ssid,argument=[{override},{notification},{default},{ssidConfig}]
