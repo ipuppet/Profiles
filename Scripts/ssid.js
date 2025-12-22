@@ -402,7 +402,7 @@ function parseSSIDConfig(configStr) {
 }
 
 const Config = {}
-if (Utils.getArgument("override") === "true") {
+if (Utils.getArgument("override") === "true" || Utils.getArgument("override") === true) {
     const defaultVal = Utils.getArgument("default")
     if (defaultVal) Config.default = parseStringConfig(defaultVal)
 
