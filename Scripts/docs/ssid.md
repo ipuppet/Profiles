@@ -12,68 +12,67 @@
 ## 配置项
 
 - outboundMode  
-    该项可省略  
-    切换出站模式。可选值如下：
-  - "GlobalDirect"
-  - "ByRule"
-  - "GlobalProxy"
+  该项可省略  
+  切换出站模式。可选值如下：
+  - "Direct"
+  - "Rule"
+  - "Proxy"
 
 - selectPolicy  
-    该项可省略  
-    切换策略组，该项应为键值对的形式存在。
+  该项可省略  
+  切换策略组，该项应为键值对的形式存在。
 
 ## 配置示例
 
-- 网络切换配置  
+- 网络切换配置
 
-    ```json
-    {
-        "ssid_1": {
-            "outboundMode": "GlobalDirect",
-            "selectPolicy": {
-                "节点选择": "DIRECT",
-                "Google": "节点选择"
-            }
-        },
-        "ssid_2": {
-            "outboundMode": "GlobalDirect",
-            "selectPolicy": {
-                "节点选择": "DIRECT",
-                "Google": "节点选择"
-            }
-        }
+```json
+{
+  "ssid_1": {
+    "outboundMode": "Direct",
+    "selectPolicy": {
+      "节点选择": "DIRECT",
+      "Google": "节点选择"
     }
-    ```
-
-    其中 `"节点选择": "DIRECT"` 若要切换到 DIRECT 需要 "节点选择" 中存在 DIRECT 选项
-
-- 未匹配网络 SSID 时的默认配置  
-
-    ```json
-    {
-        "outboundMode": "GlobalDirect",
-        "selectPolicy": {
-            "节点选择": "节点名称或其他策略名称",
-            "Google": "节点选择"
-        }
+  },
+  "ssid_2": {
+    "outboundMode": "Direct",
+    "selectPolicy": {
+      "节点选择": "DIRECT",
+      "Google": "节点选择"
     }
-    ```
+  }
+}
+```
+
+其中 `"节点选择": "DIRECT"` 若要切换到 DIRECT 需要 "节点选择" 中存在 DIRECT 选项
+
+- 未匹配网络 SSID 时的默认配置
+
+```json
+{
+  "outboundMode": "Direct",
+  "selectPolicy": {
+    "节点选择": "节点名称或其他策略名称",
+    "Google": "节点选择"
+  }
+}
+```
 
 ### 脚本参数说明
 
 - override  
-    是否覆盖其他配置，默认值为 false  
-    若为 true 则使用脚本参数传入的配置
+  是否覆盖 Boxjs 中的配置，默认值为 false
 - notification  
-    通知模式，默认值为 None
-    可选值如下：
+  通知模式，默认值为 None
+  可选值如下：
   - None: 关闭通知
   - All: 显示所有通知
   - Matched: 仅在成功匹配 SSID 并切换时显示通知
   - Unmatched: 仅在未匹配 SSID 时显示通知
 - default  
-    未匹配网络 SSID 时的默认配置
-    `outboundMode:policyGroup=policy,policyGroup2=policy2`
+  未匹配网络 SSID 时的默认配置
+  `outboundMode:policyGroup=policy,policyGroup2=policy2`
 - ssidConfig  
-    网络切换配置
-    `ssid1:outboundMode:policyGroup=policy,policyGroup2=policy2;ssid2:outboundMode:policyGroup=policy,policyGroup2=policy2`
+  网络切换配置
+  `ssid1:outboundMode:policyGroup=policy,policyGroup2=policy2;ssid2:outboundMode:policyGroup=policy,policyGroup2=policy2`

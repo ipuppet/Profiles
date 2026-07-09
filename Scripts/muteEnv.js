@@ -8,4 +8,4 @@ body = body.replaceAll("this.msg(", "__mute(")
 body = body.replaceAll("$.msg", "__mute")
 body = "const __mute=()=>{};\n" + body
 
-$done({body})
+$done({ body })
